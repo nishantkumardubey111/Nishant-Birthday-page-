@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Core: Nishant Kumar Dubey | Launch: 19.10.2009</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0D1117;
+            color: #E6EDF3;
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+        .system-card {
+            background: rgba(22, 27, 34, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(48, 54, 61, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .system-card:hover {
+            transform: translateY(-5px) scale(1.005);
+            box-shadow: 0 20px 50px rgba(79, 70, 229, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        .cta-button {
+            background: linear-gradient(90deg, #4F46E5, #8B5CF6);
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+        }
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 80%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .cta-button:hover::after {
+            opacity: 1;
+        }
+        .profile-image-wrap:hover .profile-image {
+            transform: rotateY(5deg) rotateX(-5deg) scale(1.05);
+        }
+        .profile-image-wrap {
+            perspective: 1000px;
+        }
+        .profile-image {
+            transition: transform 0.5s ease-out;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        .pulsate {
+            animation: pulse-effect 2s infinite;
+        }
+        @keyframes pulse-effect {
+            0%, 100% { opacity: 1; text-shadow: 0 0 8px #FFCC00; }
+            50% { opacity: 0.7; text-shadow: 0 0 20px #FFCC00; }
+        }
+        .countdown-unit {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            transition: background-color 0.2s;
+        }
+        .countdown-unit:hover {
+            background-color: #21262D;
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-4xl w-full mx-auto system-card rounded-2xl p-6 sm:p-10 relative">
+        <div class="mb-10 border-b border-gray-700 pb-6">
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-indigo-400 tracking-tight">
+                NISHANT KUMAR DUBEY
+            </h1>
+            <p class="text-lg sm:text-xl font-mono text-gray-500 mt-1">
+                > System Core Initialized | Launch Date: 19.10.2009
+            </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="profile-image-wrap">
+                    <img src="SAVE_20250815_194320.jpg" alt="Nishant on Motorcycle" class="profile-image w-full h-auto object-cover transform hover:scale-105" loading="lazy">
+                </div>
+                <div class="bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+                    <p class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">
+                        Status Protocol
+                    </p>
+                    <ul class="space-y-2 text-sm font-mono">
+                        <li class="flex justify-between"><span>[Module] Birthday Core</span> <span class="text-green-400">STATUS: ACTIVE</span></li>
+                        <li class="flex justify-between"><span>[Data] User Profile</span> <span class="text-green-400">STATUS: SECURE</span></li>
+                        <li class="flex justify-between"><span>[Event] Celebration</span> <span class="text-yellow-400">STATUS: PENDING...</span></li>
+                    </ul>
+                </div>
+                <div class="flex space-x-3">
+                    <img src="SAVE_20250815_121121.jpg" alt="Nishant Speaking" class="w-1/2 rounded-lg object-cover h-24 sm:h-32 border-2 border-indigo-500/50" loading="lazy">
+                    <img src="instax_1746441306019.png" alt="Nishant AI Avatar" class="w-1/2 rounded-lg object-cover h-24 sm:h-32 border-2 border-indigo-500/50" loading="lazy">
+                </div>
+            </div>
+            <div class="lg:col-span-2">
+                <h2 class="text-xl sm:text-2xl font-bold text-gray-300 mb-6 uppercase tracking-wider border-b border-gray-800 pb-3">
+                    Execution Countdown Timer
+                </h2>
+                <div id="countdown" class="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-6">
+                    <div class="text-lg text-gray-400 p-4">Initializing modules...</div>
+                </div>
+                <div class="mt-12 pt-6 border-t border-gray-700">
+                    <p class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">
+                        User Interface Commands
+                    </p>
+                    <button id="protocol-button" onclick="celebrationProtocol()" 
+                            class="cta-button w-full px-8 py-4 rounded-xl font-extrabold text-white text-lg tracking-wider shadow-xl shadow-indigo-600/30 active:scale-[0.99]">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            EXECUTE CELEBRATION PROTOCOL
+                        </span>
+                    </button>
+                    <div id="protocol-message" class="mt-4 text-center text-sm text-gray-400 h-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let timerInterval;
+        const pad = (num) => num < 10 ? "0" + num : num;
+        const createUnitHtml = (value, label) => `
+            <div class="flex flex-col items-center p-3 sm:p-5 rounded-xl countdown-unit w-[80px] sm:w-[100px] transform hover:scale-105 transition-transform duration-200">
+                <span class="text-3xl sm:text-5xl font-extrabold text-indigo-300">${pad(value)}</span>
+                <span class="text-xs sm:text-sm text-gray-500 mt-1 uppercase tracking-widest">${label}</span>
+            </div>
+        `;
+        function celebrationProtocol() {
+            const messageElement = document.getElementById("protocol-message");
+            messageElement.innerHTML = `<span class="text-indigo-400 animate-pulse">Protocol sequence initiated. Awaiting system trigger...</span>`;
+            setTimeout(() => {
+                messageElement.textContent = '';
+            }, 3000);
+        }
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const birthdayMonth = 9;
+            const birthdayDay = 19;
+            let targetYear = new Date().getFullYear();
+            let targetDate = new Date(targetYear, birthdayMonth, birthdayDay, 0, 0, 0).getTime();
+            if (now > targetDate) {
+                targetYear += 1;
+                targetDate = new Date(targetYear, birthdayMonth, birthdayDay, 0, 0, 0).getTime();
+            }
+            const distance = targetDate - now;
+            const countdownElement = document.getElementById("countdown");
+            const protocolButton = document.getElementById("protocol-button");
+            if (!countdownElement || !protocolButton) return;
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                countdownElement.innerHTML = `
+                    <div class="w-full text-center p-4">
+                        <span class="text-4xl sm:text-5xl font-extrabold text-yellow-300 pulsate">
+                            SYSTEM ONLINE: HAPPY BIRTHDAY, NISHANT! 🎉
+                        </span>
+                    </div>
+                `;
+                protocolButton.textContent = "CELEBRATION PROTOCOL COMPLETE";
+                protocolButton.classList.remove('bg-indigo-600', 'shadow-indigo-600/30', 'cta-button');
+                protocolButton.classList.add('bg-green-600', 'shadow-green-600/30');
+            } else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                countdownElement.innerHTML = 
+                    createUnitHtml(days, "DAYS") +
+                    createUnitHtml(hours, "HRS") +
+                    createUnitHtml(minutes, "MINS") +
+                    createUnitHtml(seconds, "SECS");
+            }
+        }
+        window.onload = function() {
+            updateCountdown();
+            timerInterval = setInterval(updateCountdown, 1000);
+        };
+    </script>
+</body>
+</html>
